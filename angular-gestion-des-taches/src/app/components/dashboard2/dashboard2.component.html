@@ -1,0 +1,22 @@
+<div *ngIf="role=='ROLE_ADMIN'">
+    <div class="card">
+        <p-table [value]="listeEmploye" id="Classmenetemploye">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon></th>
+                    <th pSortableColumn="prenom">Prenom <p-sortIcon field="prenom"></p-sortIcon></th>
+                    <th pSortableColumn="atelier">Atelier <p-sortIcon field="atelier"></p-sortIcon></th>
+                    <th pSortableColumn="produits">Produits <p-sortIcon field="produits"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employe>
+                <tr>
+                    <td>{{employe.nom}}</td>
+                    <td>{{employe.prenom}}</td>
+                    <td>{{employe.atelier}}</td>
+                    <td>{{employe.produits}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

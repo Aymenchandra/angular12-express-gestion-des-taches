@@ -1,0 +1,8 @@
+.inprogress
+{
+    border-left:3px solid rgb(255, 231, 95);
+}
+.completed
+{
+    border-left:3px solid rgb(106, 156, 91);
+}

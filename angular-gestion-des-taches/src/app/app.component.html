@@ -1,0 +1,21 @@
+<mat-sidenav-container style="background-color: rgba(128, 128, 128, 0.012);" *ngIf="role == 'ROLE_ADMIN' || role == 'ROLE_USER'">
+    <mat-sidenav mode="side" [(opened)]="opened" style="width:16rem"><button mat-button *ngIf="opened" (click)="opened=!opened" class="toggle" >Parametre<mat-icon >arrow_forward_ios</mat-icon></button>
+      <img class="avatar-icon"src="../assets/avatar-default-icon.png" alt="avatar">
+      <div class="text-center" style="font-size: large;">{{username}}</div>
+      <div class="text-center my-4" style="font-size: medium;">Responsable</div>
+      <button mat-button class="sub-title" routerLink="/dashboard" *ngIf="role=='ROLE_ADMIN'"><i class="material-icons" >dashboard</i>Dashboard 1</button>
+      <button mat-button class="sub-title" routerLink="/dashboard2" *ngIf="role=='ROLE_ADMIN'"><i class="material-icons" >dashboard</i>Dashboard 2</button>
+      <button mat-button class="sub-title" routerLink="/compte" *ngIf="role=='ROLE_ADMIN'"><i class="material-icons">house</i>Comptes</button>
+      <button mat-button class="sub-title" routerLink="/tache" *ngIf="role=='ROLE_ADMIN' || role=='ROLE_USER'"><i class="material-icons">task</i>Taches</button>
+      <!-- <button mat-button class="sub-title"><i class="material-icons">settings</i>Parametre</button> -->
+      <button mat-button class="logout" (click)="logout()" routerLink="/login"><i class="material-icons">power_settings_new</i>Déconnexion</button>
+
+    </mat-sidenav>
+    <mat-sidenav-content style="padding-left: 1rem;" style="height:100vh">
+        <button mat-button *ngIf="!opened" (click)="opened=!opened" style="color: grey;" style="position: absolute;left:0; height:100%;width:0.1%;"><mat-icon>arrow_back_ios</mat-icon></button>
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<router-outlet></router-outlet>

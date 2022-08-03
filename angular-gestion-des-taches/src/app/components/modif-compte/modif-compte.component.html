@@ -1,0 +1,49 @@
+<div *ngIf="role=='ROLE_ADMIN'">
+  <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form
+        (ngSubmit)="UpdateCompte()"
+        [formGroup]="editCompte"
+      >
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" disabled/>
+            <!-- <div *ngIf="f.submitted && email.errors && email.errors.required" class="invalid-feedback">
+                Veuillez saisir votre email
+            </div>   -->
+            
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" class="form-control" formControlName="nom"/>
+        </div>
+        <div class="form-group">
+          <label for="prenom">Prenom</label>
+          <input type="text" class="form-control" formControlName="prenom"/>
+        </div>
+        <div class="form-group">
+          <label for="atelier">Atelier</label>
+          <input type="text" class="form-control" formControlName="atelier"/>
+        </div>
+        
+        <div class="form-group">
+          <button class="btn btn-primary btn-block" >modifier</button>
+        </div>
+  
+        <!-- <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        <br />{{ errorMessage }}
+        </div> -->
+      </form>
+  
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Updated successfully!
+      </div>
+    </div>
+  </div>
+
+</div>

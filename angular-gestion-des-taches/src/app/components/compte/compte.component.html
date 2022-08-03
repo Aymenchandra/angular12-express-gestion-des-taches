@@ -1,0 +1,28 @@
+<div *ngIf="role=='ROLE_ADMIN'">
+    <div class="card">
+        <p-table [value]="comptes">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="nom">Nom <p-sortIcon field="nom"></p-sortIcon></th>
+                    <th pSortableColumn="prenom">Prenom <p-sortIcon field="prenom"></p-sortIcon></th>
+                    <th pSortableColumn="atelier">Atelier <p-sortIcon field="atelier"></p-sortIcon></th>
+                    <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+                    <th><button pButton type="button" label="Ajouter" class="p-button-outlined" routerLink="/ajoutcompte"></button></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-employe>
+                <tr>
+                    <td>{{employe.nom}}</td>
+                    <td>{{employe.prenom}}</td>
+                    <td>{{employe.atelier}}</td>
+                    <td>{{employe.email}}</td>
+                    <td routerLink="/modifier/{{employe._id}}"><i class="material-icons" style="color:green;cursor: pointer;font-size: x-large;">update</i></td>
+                    <td (click)="DeleteCompte(employe._id)"><i class="pi pi-trash" style="color:red;cursor:pointer;font-size: x-large;"></i></td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+

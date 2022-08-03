@@ -1,0 +1,106 @@
+<div *ngIf="role=='ROLE_ADMIN'">
+  <div class="col-md-12">
+    <div class="card card-container">
+      <img
+        id="profile-img"
+        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+        class="profile-img-card"
+      />
+      <form
+        *ngIf="!isSuccessful"
+        name="form"
+        (ngSubmit)="f.form.valid && onSubmit()"
+        #f="ngForm"
+        novalidate
+      >
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="email"
+            [(ngModel)]="form.email"
+            required
+            minlength="3"
+            maxlength="20"
+            #email="ngModel"
+            [ngClass]="{ 'is-invalid': email.errors && f.submitted }" />
+            <div *ngIf="f.submitted && email.errors && email.errors.required" class="invalid-feedback">
+                Veuillez saisir votre email
+            </div>  
+            
+        </div>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nom"
+            [(ngModel)]="form.nom"
+            required
+            nom
+            #nom="ngModel"
+            [ngClass]="{ 'is-invalid': nom.errors && f.submitted }" />
+            <div *ngIf="f.submitted && nom.errors && nom.errors.required" class="invalid-feedback">
+                Veuillez saisir votre nom
+            </div>  
+        </div>
+        <div class="form-group">
+          <label for="nom">Prenom</label>
+          <input
+            type="text"
+            class="form-control"
+            name="prenom"
+            [(ngModel)]="form.prenom"
+            required
+            prenom
+            #prenom="ngModel"
+            [ngClass]="{ 'is-invalid': prenom.errors && f.submitted }" />
+            <div *ngIf="f.submitted && prenom.errors && prenom.errors.required" class="invalid-feedback">
+                Veuillez saisir votre prenom
+            </div>  
+        </div>
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel" 
+          [ngClass]="{ 'is-invalid': password.errors && f.submitted }" />
+          <div *ngIf="f.submitted && password.errors && password.errors.required" class="invalid-feedback">
+              Veuillez saisir votre mot de passe
+          </div>          
+        </div>
+        <div class="form-group">
+            <label for="nom">Atelier</label>
+            <input
+              type="text"
+              class="form-control"
+              name="atelier"
+              [(ngModel)]="form.atelier"
+              required
+              atelier
+              #atelier="ngModel"
+              [ngClass]="{ 'is-invalid': atelier.errors && f.submitted }" />
+              <div *ngIf="f.submitted && atelier.errors && atelier.errors.required" class="invalid-feedback">
+                  Veuillez saisir votre atelier
+              </div>  
+          </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">ajouter</button>
+        </div>
+  
+        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        <br />{{ errorMessage }}
+        </div>
+      </form>
+  
+      <div class="alert alert-success" *ngIf="isSuccessful">
+        Your registration is successful!
+      </div>
+    </div>
+  </div>
+</div>

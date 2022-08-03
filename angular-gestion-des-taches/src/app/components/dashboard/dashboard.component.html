@@ -1,0 +1,142 @@
+<div *ngIf="role=='ROLE_ADMIN'">
+    <div class="cards grid">
+        <div class="col-12 md:col-6 lg:col-2 ml-8">
+            <div class="card-content bg-cyan-500 text-white font-bold border-round p-3">
+                <div class="grid">
+                    <div class="col">{{qtrealise}}</div>
+                </div>
+                <div class="grid">
+                    <div class="col-10">Quantité realisé</div>
+                    <div class="col-1"><div class="pi pi-sort-amount-up-alt"></div></div>
+                </div>
+                <p-divider type="dashed"></p-divider>
+     
+            </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-2">
+            <div class="card-content bg-orange-500 text-white font-bold border-round p-3">
+                <div class="grid">
+                    <div class="col">{{qtatemps}}</div>
+                </div>
+                <div class="grid">
+                    <div class="col-10">A temps</div>
+                    <div class="col-1"><div class="pi pi-percentage"></div></div>
+                </div>
+                <p-divider type="dashed"></p-divider>
+     
+            </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-2">
+            <div class="card-content bg-cyan-500 text-white font-bold border-round p-3">
+                <div class="grid">
+                    <div class="col">{{qtanticipe}}</div>
+                </div>
+                <div class="grid">
+                    <div class="col-10">anticipé</div>
+                    <div class="col-1"><div class="pi pi-sort-amount-up-alt"></div></div>
+                </div>
+                <p-divider type="dashed"></p-divider>
+     
+            </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-2">
+            <div class="card-content bg-orange-500 text-white font-bold border-round p-3">
+                <div class="grid">
+                    <div class="col">{{qtratrrape}}</div>
+                </div>
+                <div class="grid">
+                    <div class="col-10">Rattrapé</div>
+                    <div class="col-1"><div class="pi pi-percentage"></div></div>
+                </div>
+                <p-divider type="dashed"></p-divider>
+     
+            </div>
+        </div>
+        <div class="col-12 md:col-6 lg:col-2">
+            <div class="card-content bg-cyan-500 text-white font-bold border-round p-3">
+                <div class="grid">
+                    <div class="col">{{qtplanifie}}</div>
+                </div>
+                <div class="grid">
+                    <div class="col-10">Quantité Planifie</div>
+                    <div class="col-1"><div class="pi pi-sort-amount-up-alt"></div></div>
+                </div>
+                <p-divider type="dashed"></p-divider>
+     
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid DynamiqueContent">
+        <div class="col-4 pl-3">
+            <p-selectButton
+                [options]="adherance"
+                [(ngModel)]="adheranceValue"
+                optionValue="value"
+                (click)="ChangeAdherance(data)">   
+            </p-selectButton>
+        </div>
+        <div class="col-8">
+            <!-- years -->
+            <mat-form-field appearance="fill">
+            <mat-label>Select year</mat-label>
+            <mat-select [formControl]="yearControl" required [(ngModel)]="selectedyear">
+                <mat-option (click)="resetmonth()">--</mat-option>
+                <mat-option *ngFor="let year of years" [value]="year" (click)="generatedayByYear()" >
+                {{year.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="yearControl.hasError('required')">Please select a year</mat-error>
+            </mat-form-field>
+            <!-- months -->
+            <mat-form-field appearance="fill">
+            <mat-label>Select month</mat-label>
+            <mat-select [formControl]="monthControl" required  [(ngModel)]="selectedmonth"> <!--[disabled]="this.yearControl.hasError('required')" -->
+                <mat-option (click)="resetday()">--</mat-option>
+                <mat-option *ngFor="let month of months" [value]="month" (click)="generatedayByMonth()">
+                {{month.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="monthControl.hasError('required')">Please select a month</mat-error>
+            </mat-form-field>
+            <!-- days -->
+            <mat-form-field appearance="fill">
+            <mat-label>Select day</mat-label>
+            <mat-select [formControl]="dayControl" required  [(ngModel)]="selectedday"> <!--[disabled]="this.monthControl.hasError('required')" -->
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let day of days" [value]="day">
+                {{day.name}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="dayControl.hasError('required')">Please select a day</mat-error>
+            </mat-form-field>
+            <button pButton type="button" icon="pi pi-arrow-right" iconPos="left" label="Generate" class="p-button-warning ml-3 mb-4" (click)="generateData()"></button>
+    
+        </div>
+    </div>
+    
+    <div class="grid">
+        <div class="col-8 bg-white-500 font-bold border-round p-3 m-3 box shadow-8">
+            <p-chart type="line" [data]="lineData" ></p-chart>
+        </div>
+        <div class="col-3 bg-white-500 font-bold border-round p-3 mt-3 mb-3 box shadow-8">
+            <p-chart type="pie" [data]="pieData" ></p-chart>
+        </div>
+    </div>
+    <p-table [value]="codedata" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Code</th>
+                <th>Quantité</th>
+                <th>Atelier</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product >
+            <tr [ngClass]="{ 'retard': product[3] == 'retard','realise': product[3] == 'realise','anticipe': product[3] == 'anticipe' }">
+                <td>{{product[0]}}</td>
+                <td>{{product[1]}}</td>
+                <td>{{product[2]}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

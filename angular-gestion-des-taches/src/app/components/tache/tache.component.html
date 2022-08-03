@@ -1,0 +1,52 @@
+
+<div *ngIf="role=='ROLE_ADMIN'" class="m-6">
+  <input hidden type="file" #uploader (change)="handleUpload($event)" accept=".xlsx"/>
+  <button pButton type="button" icon="pi pi-file-excel" iconPos="left" (click)="uploader.click()" label="EXCEL" class="p-button-success"></button>
+  <button pButton type="button" icon="pi pi-file-pdf" iconPos="left" label="PDF" class="p-button-warning ml-3" (click)="downloadPDF()"></button>
+    <table class="table table-striped mt-3" id="planning">
+        <thead class="table-dark">
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Date_planifie</th>
+              <th scope="col">Code_fab</th>
+              <th scope="col">Produit</th>
+              <th scope="col">Atelier</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <tr *ngFor="let tache of taches ; let i = index" [ngClass]="{ 'completed': tache.type}" class="inprogress">
+              <th scope="row">{{i+1}}</th>
+              <td>{{tache.date_planifiee | date:'mediumDate'}}</td>
+              <td>{{tache.code_fab}}</td>
+              <td>{{tache.produit}}</td>
+              <td>{{tache.atelier}}</td>
+              <td><i class="pi pi-trash" style="color:red;font-size: x-large;cursor: pointer;" (click)="deletetache(i)"></i></td>
+            </tr>
+          </tbody>
+    </table>    
+</div>
+<div *ngIf="role=='ROLE_USER'" >
+  <table class="table table-striped">
+      <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Date_planifie</th>
+            <th scope="col">Code_fab</th>
+            <th scope="col">Produit</th>
+            <th scope="col">Atelier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tache of tachesbyatelier ; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{tache.date_planifiee | date:'mediumDate'}}</td>
+            <td>{{tache.code_fab}}</td>
+            <td>{{tache.produit}}</td>
+            <td>{{tache.atelier}}</td>
+            <td><i class="pi pi-check-circle" style="color:green;font-size: x-large;cursor: pointer;" (click)="confirmtache(i)"></i></td>
+          </tr>
+        </tbody>
+  </table>    
+</div>
+

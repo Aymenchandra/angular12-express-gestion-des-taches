@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+        <div class="col-12 col-lg-5 px-4">
+            <div class="card shadow-sm rounded-0">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <a href="/">
+                            <img src="./assets/ZODIAC.jpg" width="200" class="img-fluid" alt="Logo">
+                        </a>
+                    </div>
+
+                    <form 
+                    name="form"
+                    (ngSubmit)="f.form.valid && onSubmit()"
+                    #f="ngForm"
+                    novalidate>
+                        <div class="mb-4">
+                            <label class="font-size-h6 font-weight-bolder text-dark">Mot de passe :<span
+                  style="color:rgb(0, 0, 255)">*</span></label>
+                            <input type="password"
+                            class="form-control"
+                            name="password"
+                            [(ngModel)]="form.password"
+                            required
+                            #password="ngModel" 
+                            [ngClass]="{ 'is-invalid': password.errors && f.submitted }" />
+                            <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                                <div *ngIf="password.errors.required">Veuillez saisir votre nouveau mots de passe</div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center mb-4 ">
+                            <button class="btn  font-weight-bolder px-3 py-1 mr-3 " style="background-color:rgba(2, 2, 248, 0.964);color:white;">Changer</button>
+                        </div>
+                        <div class="form-group">
+                          <div
+                            class="alert alert-danger"
+                            role="alert"
+                            *ngIf="f.submitted && isfailed"
+                          >
+                          Error:{{ errorMessage }}
+                          </div>
+                        </div>  
+                    </form>
+                    <div class="alert alert-success" *ngIf="isSuccess">
+                        Updated successfully!
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

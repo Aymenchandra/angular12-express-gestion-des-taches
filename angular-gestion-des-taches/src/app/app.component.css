@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+mat-sidenav
+{
+    background-color: white;
+    max-width: 17rem;
+}
+.toggle
+{
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: large;
+    background-color: #06B6D4;
+    color:white;
+    height: 60px;
+}
+.toggle mat-icon
+{
+    position: relative;
+    left:6%;
+    font-size: 23px;
+}
+.avatar-icon
+{
+    display: block;
+    width: 50%;
+    margin: 5px auto;
+}
+.sub-title
+{
+    width: 100%;
+    font-size: medium;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: left;
+}
+.sub-title .material-icons, .logout .material-icons
+{
+    margin-top:-5px;
+    margin-right: 15px;
+}
+.logout
+{
+    position: absolute;
+    bottom: 70px;
+    left:0;
+    width: 100%;
+    font-size: medium;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    text-align: left;
+}
